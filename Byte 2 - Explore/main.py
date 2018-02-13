@@ -15,6 +15,7 @@ import webapp2
 import logging
 import json
 import urllib
+# from google.appengine.api import urlfetch
 
 # this is used for constructing URLs to google's APIS
 from googleapiclient.discovery import build
@@ -32,11 +33,11 @@ API_KEY = 'AIzaSyBqQNVhY5NQmDRxDJ8InWBQ-CnOck3gsng'
 service = build('fusiontables', 'v1', developerKey=API_KEY)
 
 # This is the table id for the fusion table
-TABLE_ID = '1aF58hhWU-2UfdZa91870DhHGVCpFP_0ywn12eK0W'
+TABLE_ID = '1hUUK3S3KhYOGVlawX17uAyiRa4du62WsX2AMfKWr'
 
 # This is the default columns for the query
 query_cols = []
-query_values = ['Vancouver'] #Change to be the value(s) you're querying in the column you've specified
+query_values = ['USA'] #Change to be the value(s) you're querying in the column you've specified
 
 # Import the Flask Framework
 from flask import Flask, request
@@ -44,7 +45,7 @@ app = Flask(__name__)
 
 def get_all_data(query):
     #Example from the assignment instructions
-    query = "SELECT * FROM " + TABLE_ID + " WHERE  City = 'Vancouver' LIMIT 8"
+    query = "SELECT * FROM " + TABLE_ID + " WHERE  Country = 'USA' LIMIT 10"
     
     response = service.query().sql(sql=query).execute()
     logging.info(response['columns'])
@@ -69,12 +70,12 @@ def make_query(cols, values, limit):
     string_values = string_values[2:len(string_values)]
     
     #Change this query to have your corresponding column (in our soccer example, the column for our WHERE is Scorer).
-    query = "SELECT " + string_cols + " FROM " + TABLE_ID + " WHERE City = '" + string_values + "'"
+    query = "SELECT " + string_cols + " FROM " + TABLE_ID + " WHERE Country = '" + string_values + "'"
 
     query = query + " LIMIT " + str(limit)
 
     logging.info(query)
-    # query = "SELECT * FROM " + TABLE_ID + " WHERE  Scorer = 'Forlan' LIMIT 8"
+    # query = "SELECT * FROM " + TABLE_ID + " WHERE  Scorer = 'Forlan' LIMIT 10"
 
     return query
     
@@ -85,7 +86,7 @@ def make_query(cols, values, limit):
 def index():
     template = JINJA_ENVIRONMENT.get_template('templates/index.html')
     request = service.column().list(tableId=TABLE_ID)
-    res = get_all_data(make_query([], query_values, 8)) #5 is our limit we're passing in
+    res = get_all_data(make_query([], query_values, 10)) #5 is our limit we're passing in
     logging.info('allheaders')
     return template.render(columns=res['columns'], rows = res['rows'] )
     #return template.render(headers = cols, content = rows)
@@ -95,7 +96,7 @@ def update_table():
     logging.info(request.get_json())
     cols = request.json['cols']
     logging.info(cols)
-    result = get_all_data(make_query(cols, query_values, 100))
+    result = get_all_data(make_query(cols, query_values, 10))
     logging.info(result)
     return json.dumps({'content' : result['rows'], 'headers' : result['columns']})
 

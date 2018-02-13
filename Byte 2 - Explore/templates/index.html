@@ -8,7 +8,8 @@
     <meta name="description" content="Interactive Fusion Table for Winter Olympics">
     <meta name="author" content="Kyle Furlong">
     <link rel="icon" href="favicon.ico">
-    <title>Explore Byte Tutorial</title>
+   
+    <title>EDA at the Winter Olympics</title>
     
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -57,24 +58,22 @@
       </div> <!-- /page-header -->
     </div> <!-- /container -->
     
+    <!--
     <div class="button-toolbar" role="toolbar" id="headers" name="headers">
       {% for column in columns %}
       <button type="button" class = "btn-space btn btn-info" id="{{column}}" onclick="updateTable('{{column}}')">{{column}}</button>
       {% endfor %}
     </div>
-    
-    <!--
-    <div id="animals"><table id="data" class="table table-striped table-hover">
-	<thead class ="thead-inverse">
-	  <tr id="cols">
-	  </tr>
-	</thead>
-	<tbody id="rows"> 
-	</tbody>
-    </table></div>
-  -->
-  
-  <div class="table-responsive">
+    -->
+<div class="row">
+	<div class="col-md-1">
+	</div>
+	<div class="col-md-10">
+	<p>To get a better idea of our data, we include a short excerpt of it below. 
+	Note that while we filtered our data to only include medal winners from the 
+	USA, information on every country is included in the data set. 
+	</p>
+	<div class="table-responsive">
     <table class="table table-striped table-hover">
       <thead class="thead-inverse">
        <tr id="cols">
@@ -94,7 +93,66 @@
         </tbody>
      </table>
   </div>
+  <p>
+  	Perhaps the first question that arises from viewing the data is one of trends. Specifically, which nations tend to 
+  	excel in the Winter Olympics and are the main contenders changing over time? On a macro-level, we look at the total
+  	number of medals won by the top ten most competitive nations in the Winter Olympics below.
+  </p>
+  <div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  	<iframe width="700" height="500" scrolling="no" style="width: 50%" frameborder="no" src="https://fusiontables.google.com/embedviz?containerId=googft-gviz-canvas&amp;q=select+col1%2C+count()%2C+MAXIMUM(col5)%2C+AVERAGE(col2)+from+1QlcKkac10_wX1r90RvNWyRQvVCug026ND872rYWE+group+by+col1+order+by+MAXIMUM(col5)+desc+limit+10&amp;viz=GVIZ&amp;t=BAR&amp;uiversion=2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;gco_useFirstColumnAsDomain=true&amp;gco_legacyScatterChartLabels=true&amp;gco_isStacked=false&amp;gco_booleanRole=certainty&amp;gco_hAxis=%7B%22useFormatFromData%22%3Afalse%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22logScale%22%3Afalse%2C+%22title%22%3A%22Number+of+Medals%22%2C+%22formatOptions%22%3A%7B%22source%22%3A%22inline%22%7D%2C+%22format%22%3A%220.%23%23%22%7D&amp;gco_vAxes=%5B%7B%22useFormatFromData%22%3Atrue%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22viewWindow%22%3Anull%2C+%22viewWindowMode%22%3Anull%7D%2C%7B%22useFormatFromData%22%3Atrue%7D%5D&amp;gco_legend=none&amp;gco_title=Total+Medals+across+all+Winter+Olympics&amp;gco_series=%7B%220%22%3A%7B%22color%22%3A%22%23980000%22%7D%7D&amp;width=700&amp;height=500"></iframe>
+  </div>	
+	<p>
+	From this plot above generated using Google Fusion Tables, we see that the USA is the current leader with respect
+	to the total number of medals won over the history of the Winter Olympics. However, Canada is a close second. A logical
+	next question looks at how this distribution of medals changed over time. While addressing this question requires
+	a bit more complex plotting than supported by Google Fusion Tables, we can find the time-series trend of these top ten
+	medal earning countries using <em>R</em>, the statistical programming software, and include the output of our analysis below:
+	</p>
+	<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+		<img src="/images/ptsByYearPlot_byte2.png" alt="Points earned by country by year" /> 
+	</div>
+	<br>
+	<p>From here, our data provides an additional level of granularity to help determine whether some nations are simply
+	better at the Winter Olympics or if some nations are simply riding the success of one or two exceptionally qualified athletes.
+	To look at this potential issue, we highlight the top ten most decorated Winter Olympic athletes using Google Fusion Table data visualization:
+	</p>
+	<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  		<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://fusiontables.google.com/embedviz?containerId=googft-gviz-canvas&amp;q=select+col1%2C+MAXIMUM(col6)%2C+AVERAGE(col7)+from+1frUKD6cyCp8HMO0wxt23iYnqnYYZLWX9hJLg-5QC+group+by+col1+order+by+AVERAGE(col7)+desc+limit+10&amp;viz=GVIZ&amp;t=BAR&amp;uiversion=2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;gco_useFirstColumnAsDomain=true&amp;gco_legacyScatterChartLabels=true&amp;gco_isStacked=false&amp;gco_booleanRole=certainty&amp;gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3A35%2C+%22min%22%3A0%7D%2C+%22minValue%22%3A0%2C+%22maxValue%22%3A35%2C+%22logScale%22%3Afalse%2C+%22title%22%3A%22Medals+(Blue)%2C+Points+(Red)%22%2C+%22viewWindowMode%22%3A%22explicit%22%7D&amp;gco_vAxes=%5B%7B%22useFormatFromData%22%3Atrue%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22viewWindow%22%3Anull%2C+%22viewWindowMode%22%3Anull%7D%2C%7B%22useFormatFromData%22%3Atrue%7D%5D&amp;gco_legend=none&amp;gco_title=Medals+(Blue)+and+Points+(Red)+Earned+by+Top+Olympians&amp;gco_domainAxis=%7B%22direction%22%3A1%7D&amp;gco_series=%7B%220%22%3A%7B%22color%22%3A%22%230000ff%22%7D%2C+%221%22%3A%7B%22color%22%3A%22%23980000%22%7D%7D&amp;width=700&amp;height=500"></iframe>
+  	</div>
+  	<p>As hinted in the chart above, some nations do seem to be bolstered by some prestigious Olympians, but the 
+  	exemplary performances of these individuals do not entirely account for their nation's Olympic success and dominance. 
+  	Therefore, we turn our attention to another potential source of bias in our data: location. Logically, the Winter Olympics
+  	are only held once every four years and the venue of the Games must be in a locale with a favorable climate for winter sports
+  	and activities. This pre-requisite effectively rules out hosting the Winter Olympics in the Southern hemisphere, which experiences
+  	winter during the Northern hemisphere's summer, and vice-versa. This fact is clearly shown in our geospatial visualization below:
+  	</p>
+  	<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  		<iframe width="700" height="600" scrolling="no" frameborder="no" src="https://fusiontables.google.com/embedviz?q=select+col2+from+1hUUK3S3KhYOGVlawX17uAyiRa4du62WsX2AMfKWr&amp;viz=MAP&amp;h=false&amp;lat=49.99694471267025&amp;lng=13.166724414453142&amp;t=3&amp;z=2&amp;l=col2&amp;y=2&amp;tmplt=2&amp;hml=ONE_COL_LAT_LNG"></iframe>
+  	</div>
+  	<p>Given this information, we may surmise that there is some degree of <em>home field advantage</em> that hosting nations
+  	enjoy when competing in the Winter Olympics in their own nation. If this is the case, then we would anticipate nations
+  	from the Southern hemisphere would earn fewer medals in general over time since they would never have the opportunity to 
+  	host the Winter Olympics in their respective nations. While somewhat over simplified, we present the trend in host nation points
+  	versus average non-host nation points below:
+  	</p>
+  	<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+  		<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://fusiontables.google.com/embedviz?containerId=googft-gviz-canvas&amp;viz=GVIZ&amp;t=LINE_AGGREGATE&amp;isXyPlot=true&amp;bsize=0.0&amp;q=select+col1%2C+col15%2C+col16+from+1dznleu26uxzZYr1ivxk0RoSWu3_I_vqU7-kZGZfn&amp;qrs=+where+col1+%3E%3D+&amp;qre=+and+col1+%3C%3D+&amp;qe=+order+by+col1+asc&amp;uiversion=2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;width=700&amp;height=500"></iframe>
+	</div>
+	
+	<p>Overall, this plot seems to indicate that there <em>may</em> be some degree of home-field advantage experienced by 
+	host nations. However, since the inception of the Winter Games in 1924, this advantage seems to be shrinking and 
+	becoming slightly more erratic. It's also important to note that many of the nations who tend to host the Winter Olympics,
+	particularly in the past few cycles, are those who historically performed better in the Games anyway, which represents
+	a slight source of bias when making inferences.
+	</p>
+	
+</div>
+<div class="col-md-1">
+</div>
+</div>  
   
+  
+   
   
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -191,5 +249,17 @@
 				   
 				   
 </script>
+
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#rows2 tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+
 </body>
 </html>

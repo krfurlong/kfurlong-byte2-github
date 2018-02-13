@@ -46,26 +46,51 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="jumbotron">
 	<h1>Quality: About This Data Set</h1>
-        <p>Write a brief summary about the quality of the data set here</a></p>
+        <p>Given the journalistic integrity of The Guardian, the overall quality of the Winter Olympic data set is very good.
+        Care was clearly taken to ensure the data was presented correctly and the active data science community at Kaggle provided
+        an additional degree of vetting to check the data against any inconsistencies that may have existed.</p>
       </div>
 
     
       <div class="page-header">
 	<h2>Is the data complete?</h2>
-	<p>If not, what is missing and what concerns does it raise?
-	What is your evidence for this?</p>
+	<p>Given the somewhat scattered nature of historic Olympic data, this data set is very complete and comprehensive. That being said,
+	it is also helpful that we were able to cross-reference any suspicious data point against multiple free online sources. For
+	example, <a href = "https://www.olympic.org/olympic-games">the Olympics website</a> also includes information on all historic medal 
+	winners and maintains data on past host cities. </p>
+	<p>While our data is very complete, we do note that we lack data on years between 1938 and 1942, inclusive. Upon looking into
+	this notable omission, we realized that the Winter Games had been cancelled during these years, for the obvious reason of WWII. It 
+	was also interesting going through our analysis to see that one of the top performing nations with respect to medal count during the late 1960s through 1980s
+	completely fell out of the rankings during more recent years. Again, upon examining our data, we found that this nation was the USSR,
+	which dissolved into modern-day Russia between 1990 and 1991. We check both of these historical abnormalities in our data against
+	history texts online to verify our conclusions explaining the missingness in our data. 
+	</p>
       </div>
       
       <div class="page-header">
 	<h2>Is the data coherent?</h2>
-	<p>Does it make sense relative to itself? Does it match your
+	<p>This data is coherent in the sense that it lacks inconsistencies outside of the few notable omissions as mentioned above.
+	While the data in its original format proved somewhat challenging to analyze, after using Wrangler to re-orient our data,
+	we found that all values seemed to fall within the range of reasonable parameters. For example, our intuition surrounding the
+	most decorated countries leads us to believe that nations that receive more snow on average should likely perform better in the 
+	Winter Olympics. Our plots and unlisted summary statistics supported this assumption. Similarly, we would anticipate that
+	most Olympians only win one or two medals over the course of their Olympic career while those who win more go down in history
+	as athletic heroes and national role models. To check this assumption, we compiled a list of the top ten most decorated Winter Olympians
+	and verified that these individuals were indeed the best in their respective sports at the time of their athletic careers. Furthermore,
+	we noted that no individual earned more than 13 medals, which is precisely the quantity of medal awarded to the most decorated Winter Olympian, 
+	Ole Einar Bjørndalen from Norway. </p>
+	<p
+	Does it make sense relative to itself? Does it match your
 	expectations? Are the distributions sensible? What is your
 	evidence for this?</p>
       </div>
 
       <div class="page-header">
 	<h2>Is the data correct?</h2>
-	<p>What aspects of this data can you verify? How did you do so? What did
+	<p>Given that the Olympic Committee would gain little, if nothing, by lying about the medal
+	winners of the past, we can assume that 
+	
+	What aspects of this data can you verify? How did you do so? What did
 	you find?</p>
       </div>
 
