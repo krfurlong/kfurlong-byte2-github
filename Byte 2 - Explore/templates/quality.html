@@ -58,6 +58,11 @@
 	it is also helpful that we were able to cross-reference any suspicious data point against multiple free online sources. For
 	example, <a href = "https://www.olympic.org/olympic-games">the Olympics website</a> also includes information on all historic medal 
 	winners and maintains data on past host cities. </p>
+	
+	<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+		<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://fusiontables.google.com/embedviz?containerId=googft-gviz-canvas&amp;q=select+col1%2C+count()+from+1hUUK3S3KhYOGVlawX17uAyiRa4du62WsX2AMfKWr+group+by+col1+order+by+count()+asc+limit+35&amp;viz=GVIZ&amp;t=COLUMN&amp;uiversion=2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;width=700&amp;height=500"></iframe>
+	</div>
+	
 	<p>While our data is very complete, we do note that we lack data on years between 1938 and 1942, inclusive. Upon looking into
 	this notable omission, we realized that the Winter Games had been cancelled during these years, for the obvious reason of WWII. It 
 	was also interesting going through our analysis to see that one of the top performing nations with respect to medal count during the late 1960s through 1980s
@@ -67,7 +72,7 @@
 	</p>
       </div>
       
-      <div class="page-header">
+ <div class="page-header">
 	<h2>Is the data coherent?</h2>
 	<p>This data is coherent in the sense that it lacks inconsistencies outside of the few notable omissions as mentioned above.
 	While the data in its original format proved somewhat challenging to analyze, after using Wrangler to re-orient our data,
@@ -79,19 +84,34 @@
 	and verified that these individuals were indeed the best in their respective sports at the time of their athletic careers. Furthermore,
 	we noted that no individual earned more than 13 medals, which is precisely the quantity of medal awarded to the most decorated Winter Olympian, 
 	Ole Einar Bjørndalen from Norway. </p>
-	<p
-	Does it make sense relative to itself? Does it match your
-	expectations? Are the distributions sensible? What is your
-	evidence for this?</p>
-      </div>
+	
+	<p>We also would expect the Winter Olympics to fall every four years. While we acknowledged the missing data points for 1938 and 1942 above,
+	we note a slight irregulatiry during the early 1990s. Between 1992 and 1994, the Winter Olympics appear to have been held twice. We initially
+	believed that this was a data entry error, but upon consulting the Olympic history records again, we realized that the Games were indeed held
+	during both of these years in order to offset the Winter and Summer Olympics by two years. Similarly, logic would tell us that there should be
+	a relatively equal number of types medals assigned. The plot below shows that this is not entirely true:
+	</p>
+	
+	<div style="display: block; margin-left: auto; margin-right: auto; width: 50%;">
+		<iframe width="700" height="500" scrolling="no" frameborder="no" src="https://fusiontables.google.com/embedviz?containerId=googft-gviz-canvas&amp;q=select+col9%2C+count()+from+1hUUK3S3KhYOGVlawX17uAyiRa4du62WsX2AMfKWr+group+by+col9+order+by+count()+asc+limit+10&amp;viz=GVIZ&amp;t=COLUMN&amp;uiversion=2&amp;gco_forceIFrame=true&amp;gco_hasLabelsColumn=true&amp;gco_vAxes=%5B%7B%22title%22%3Anull%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%7D%2C%7B%22useFormatFromData%22%3Atrue%2C+%22viewWindow%22%3A%7B%22max%22%3Anull%2C+%22min%22%3Anull%7D%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%7D%5D&amp;gco_useFirstColumnAsDomain=true&amp;gco_legacyScatterChartLabels=true&amp;gco_isStacked=false&amp;gco_booleanRole=certainty&amp;gco_hAxis=%7B%22useFormatFromData%22%3Atrue%2C+%22minValue%22%3Anull%2C+%22maxValue%22%3Anull%2C+%22viewWindow%22%3Anull%2C+%22viewWindowMode%22%3Anull%7D&amp;gco_legend=none&amp;width=700&amp;height=500"></iframe>
+	</div>
+	
+	<p>
+	Although the number of bronze, silver, and gold medals awarded is not identical, this discrepancy is likely due to 
+	the team sports in the Games such as figure skating and bobsled, which may include alternates who earn a medal regardless
+	of their participation in the competition.
+	</p>
+</div>
 
       <div class="page-header">
 	<h2>Is the data correct?</h2>
-	<p>Given that the Olympic Committee would gain little, if nothing, by lying about the medal
-	winners of the past, we can assume that 
-	
-	What aspects of this data can you verify? How did you do so? What did
-	you find?</p>
+	<p>The data that The Guardian compiled and uploaded to Kaggle appears to be correct. To verify the data, I researched
+	other <a href = "https://www.olympic.org/">online collections of Olympic records</a> and informally compared the results between the two. While the format of The
+	Guardian's data set differs slightly, this variation is only to accomodate clean entry into a data table and stream-lined
+	data manipulation and analysis. While it is theoretically possible that the Olympic Committee falsified some of the data on
+	their website in order to convey some political message, the information on Olympic medalists is available on countless 
+	websites and doing so would seriously jeopardize the legitimacy of the Committee's mission to promote peace and respect between nations.
+	</p>
       </div>
 
     </div> <!-- /container -->
